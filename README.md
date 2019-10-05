@@ -1,4 +1,4 @@
-# Twitch Bot boilerplate
+# Twitch Bot
 
 "Ready to go" boilerplate with Jest, TMI.js, Nodemon, Config, Babel.
 
