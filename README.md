@@ -58,16 +58,3 @@ messageToUser(user.username, message);
 // In chat:
 // your_bot: @devkucher, thanks for follow dude
 ```
-
-## Contributing
-
-If you have any comments or ideas - goto new issue.
-
-## Get in touch
-
-- Twitch [@devkucher](https://twitch.tv/devkucher)
-- Me on Medium [@KucherDev](https://medium.com/@KucherDev)
-- Follow [@KucherDev on Twitter](https://twitter.com/KucherDev)
-- Have a questions? [My telegram](https://t.me/qWici)
-
-## Have a fun :blush:

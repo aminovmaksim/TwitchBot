@@ -12,5 +12,6 @@ module.exports = {
     username: config.get("bot.username"),
     password: config.get("bot.oauth_token")
   },
-  channels: [config.get("channel")]
+  channels: config.get("channels"),
+  client_id: config.get("client_id")
 };
