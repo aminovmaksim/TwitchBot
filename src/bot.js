@@ -24,7 +24,7 @@ client.on("chat", (channel, user, message, self) => {
   message = message.toLowerCase();
 
   if ((message.includes("бот") || message.includes("mrdestructoid")) && message.includes("zortan")) {
-    client.action(channel, user.username + " сам ты бот MrDestructoid");
+    client.action(channel, user.username + bot_angry[Math.floor(Math.random() * bot_angry.length)]);
     return;
   }
 });
@@ -127,6 +127,22 @@ const hello = [
   ", привет muldZdarova, как дела?",
   ", дарова muldZdarova",
   ", дароуууу muldZdarova",
-  ", АХОЙЙ muldZdarova"
+  ", АХОЙЙ muldZdarova",
+  ", алоха muldZdarova"
+]
+
+const bot_angry = [
+  ", сам ты бот",
+  ", я не бооот",
+  ", да вы достали называть меня ботом",
+  ", да я бот и че ты мне сделаешь? а?",
+  ", еще раз назовешь меня ботом, я уйду (нет)",
+  ", херасе, ты охерел?",
+  ", и че?",
+  ", все высказал?",
+  ", легче стало?",
+  ", еще я филантроп, гений и просто кодзима",
+  ", тут сыглы",
+  ", сам ты бот MrDestructoid"
 ]
 
