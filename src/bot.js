@@ -69,9 +69,9 @@ function init_viewers() {
   axios.get(url_string)
   .then(function (response) {
     viewers = response['data']['chatters']['viewers'];
-    viewers.concat(other_bots);
-    viewers.concat(response['data']['chatters']['vips']);
-    viewers.concat(response['data']['chatters']['moderators']);
+    viewers = viewers.concat(other_bots);
+    viewers = viewers.concat(response['data']['chatters']['vips']);
+    viewers = viewers.concat(response['data']['chatters']['moderators']);
     console.log(JSON.stringify(viewers));
   })
   .catch(function (error) {
