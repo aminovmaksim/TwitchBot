@@ -20,10 +20,10 @@ client.on("chat", (channel, user, message, self) => {
     return;
   }
 
-  // if (!containsObject(user.username, viewers)) {
-  //   viewers.push(user.username);
-  //   client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
-  // }
+  if (!containsObject(user.username, viewers)) {
+    viewers.push(user.username);
+    client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
+  }
 
   // if message has symbol whats mean command - !
   if (message.indexOf("!") !== -1) {
@@ -49,7 +49,7 @@ function isStreamLive() {
   })
   .then(function (response) {
     // console.log(response['data']);
-    var res = response['data']
+    var res = response['data'];
     if (res['data'].length === 0) {
       console.log("DEBUG: Stream is offline");
       viewers = [];
