@@ -18,13 +18,13 @@ client.on("chat", (channel, user, message, self) => {
 
   if (!isAlreadyViewer(channel, user.username)) {
     proceedNewViewer(channel, user.username);
-    //client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
+    client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
   }
 
   message = message.toLowerCase();
 
   if (message.includes("бот") || message.includes("mrdestructoid")) {
-    //client.action(channel, user.username + " сам ты бот MrDestructoid");
+    client.action(channel, user.username + " сам ты бот MrDestructoid");
     return;
   }
 });
