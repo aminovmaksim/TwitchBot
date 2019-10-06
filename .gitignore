@@ -49,5 +49,6 @@ Temporary Items
 yarn.lock
 node_modules/
 config/default.json5
+nohup.out
 
 coverage/

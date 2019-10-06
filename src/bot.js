@@ -49,7 +49,7 @@ function isStreamLive() {
   })
   .then(function (response) {
     // console.log(response['data']);
-    if (response['data'].length === 0) {
+    if (response['data'].length === undefined) {
       console.log("DEBUG: Stream is offline");
       viewers = [];
     } else {
