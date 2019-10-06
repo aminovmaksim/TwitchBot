@@ -23,9 +23,12 @@ client.on("chat", (channel, user, message, self) => {
 
   message = message.toLowerCase();
 
-  if ((message.includes("бот") || message.includes("mrdestructoid")) && message.includes("zortan")) {
-    client.action(channel, user.username + bot_angry[Math.floor(Math.random() * bot_angry.length)]);
-    return;
+  if (message.includes("zortan") || message.includes("зортан")) {
+    if (message.includes("бот") || message.includes("mrdestructoid")) {
+      client.action(channel, user.username + bot_angry[Math.floor(Math.random() * bot_angry.length)]);
+      return;
+    }
+    client.action(channel, user.username + default_answers[Math.floor(Math.random() * default_answers.length)]);
   }
 });
 
@@ -137,12 +140,41 @@ const bot_angry = [
   ", да вы достали называть меня ботом",
   ", да я бот и че ты мне сделаешь? а?",
   ", еще раз назовешь меня ботом, я уйду (нет)",
-  ", херасе, ты охерел?",
+  ", херасе, вот это новости",
   ", и че?",
   ", все высказал?",
   ", легче стало?",
   ", еще я филантроп, гений и просто кодзима",
   ", тут сыглы",
   ", сам ты бот MrDestructoid"
+]
+
+const default_answers = [
+  ", я чет хз на самом деле",
+  ", наверное скорее да, чем нет",
+  ", я в этом не разбираюсь, да и оно мне собственно до пизды",
+  ", а что ты сам думаешь?",
+  ", а к этому вопросу я не готовился",
+  ", надо разобраться в этом вопросе",
+  ", на все воля божья",
+  ", ну а хули?",
+  ", я не знаю",
+  ", ну, это как посмотреть",
+  ", я вас услышал",
+  ", нет",
+  ", точно нет",
+  ", спорненько ...",
+  ", ну такое",
+  ", не видишь, я бухаю??? ",
+  ", чо?",
+  ", а что бы на это сказал Иисус?",
+  ", я в этом не разбираюсь, да и оно мне собственно до пизды",
+  ", извините, я не говорю по-еблански",
+  ", ты сейчас серьезно?",
+  ", потому что гладиолус",
+  ", а зачем ?",
+  ", потому что конь в ванной",
+  ", потому что ТАК ЗАДУМАНО",
+  ", потому что крокодил ходит лежа"
 ]
 
