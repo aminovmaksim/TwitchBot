@@ -17,20 +17,15 @@ client.on("chat", (channel, user, message, self) => {
     return;
   }
 
-  // if (!containsObject(user.username, viewers)) {
-  //   viewers.push(user.username);
-  //   client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
-  // }
-
   if (!isAlreadyViewer(channel, user.username)) {
     proceedNewViewer(channel, user.username);
-    //client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
-    console.log(user.username + hello[Math.floor(Math.random() * hello.length)]);
+    client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
   }
 
-  // if message has symbol whats mean command - !
-  if (message.indexOf("!") !== -1) {
-    resolve(channel, user, message);
+  message = message.toLowerCase();
+
+  if (message.includes("бот") || message.includes("mrdestructoid")) {
+    client.action(channel, user.username + " сам ты бот MrDestructoid");
     return;
   }
 });
@@ -135,3 +130,4 @@ const hello = [
   ", дароуууу muldZdarova",
   ", АХОЙЙ muldZdarova"
 ]
+
