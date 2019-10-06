@@ -55,7 +55,9 @@ setInterval(function() {
 // Ask random viewer random question
 setInterval(function() {
   for (var i = 0; i < client.channels.length; i++) {
-    client.action(client.channels[i], viewers[i][Math.floor(Math.random() * (viewers[i].length - 1))] + general_questions[Math.floor(Math.random() * general_questions.length)]);
+    if (isStreamOnline(channels[i])) {
+      client.action(client.channels[i], viewers[i][Math.floor(Math.random() * (viewers[i].length - 1))] + general_questions[Math.floor(Math.random() * general_questions.length)]);
+    }
   }
 }, 180000);
 
