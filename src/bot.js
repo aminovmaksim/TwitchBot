@@ -23,7 +23,7 @@ client.on("chat", (channel, user, message, self) => {
 
   message = message.toLowerCase();
 
-  if (message.includes("бот") || message.includes("mrdestructoid")) {
+  if ((message.includes("бот") || message.includes("mrdestructoid")) && message.includes("zortan")) {
     client.action(channel, user.username + " сам ты бот MrDestructoid");
     return;
   }
