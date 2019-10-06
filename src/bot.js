@@ -2,27 +2,30 @@ import client from "./client";
 import { resolve } from "./commandResolver";
 import * as config from "./config";
 const axios = require('axios');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 client.connect();
 
-var viewers;
-init_viewers();
-isStreamLive();
+var channels; // contains id for each channel
+var viewers; // contains array of viewers of each channel
 
-// Check if stream is online every 10 minutes
-setInterval(function() {
-  isStreamLive();
-}, 600000);
+init();
 
 // Commands
 client.on("chat", (channel, user, message, self) => {
-  if (user.username === "zortan3301") { // bot message
+  if (user.username === config.identity.username) { // bot message
     return;
   }
 
-  if (!containsObject(user.username, viewers)) {
-    viewers.push(user.username);
-    client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
+  // if (!containsObject(user.username, viewers)) {
+  //   viewers.push(user.username);
+  //   client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
+  // }
+
+  if (!isAlreadyViewer(channel, user.username)) {
+    proceedNewViewer(channel, user.username);
+    //client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
+    console.log(user.username + hello[Math.floor(Math.random() * hello.length)]);
   }
 
   // if message has symbol whats mean command - !
@@ -32,51 +35,77 @@ client.on("chat", (channel, user, message, self) => {
   }
 });
 
-// client.on("join", function (channel, username, self) {
-//   if (username === "zortan3301") // that is me
-//     return;
 
-//   client.action(channel, username + hellos[Math.floor(Math.random() * hello.length)]);
-// });
-
-// clear viewers array if stream is offline
-function isStreamLive() {
-  var url_string = "https://api.twitch.tv/helix/streams?user_id=138140188"; // user_id (https://api.twitch.tv/helix/users?login=<USERNAME>)
-  axios.get(url_string, {
-    headers: {
-      "Client-ID" : config.client_id
-    }
-  })
-  .then(function (response) {
-    // console.log(response['data']);
-    var res = response['data'];
-    if (res['data'].length === 0) {
-      console.log("DEBUG: Stream is offline");
-      viewers = [];
-    } else {
-      console.log("DEBUG: Stream is online");
-      return;
-    }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+// Initialize when bot has been launched
+function init() {
+  channels = [];
+  viewers = [];
+  for (var i = 0; i < client.channels.length; i++) {
+    channels[i] = httpGetChannelId(client.channels[i]);
+    viewers[i] = httpGetViewers(client.channels[i]);
+  }
 }
 
-// Initialize viewers array when bot has been launched
-function init_viewers() {
-  var url_string = "https://tmi.twitch.tv/group/user/pray_play/chatters";
-  axios.get(url_string)
-  .then(function (response) {
-    viewers = response['data']['chatters']['viewers'];
-    viewers = viewers.concat(other_bots);
-    viewers = viewers.concat(response['data']['chatters']['vips']);
-    viewers = viewers.concat(response['data']['chatters']['moderators']);
-    console.log(JSON.stringify(viewers));
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+// If stream is offline then clear viewers array
+setInterval(function() {
+  for (var i = 0; i < channels.length; i++) {
+    if (!isStreamOnline(channels[i])) {
+      viewers[i] = [];
+    }
+  }
+}, 600000);
+
+// Get current stream viewers
+function httpGetViewers(channel) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("GET", `https://tmi.twitch.tv/group/user/${channel}/chatters`, false);
+  xmlHttp.setRequestHeader("Client-ID", config.client_id);
+  xmlHttp.send(null);
+
+  var response = JSON.parse(xmlHttp.responseText);
+  var v = response.chatters.viewers;
+  v = v.concat(response.chatters.vips);
+  v = v.concat(response.chatters.moderators);
+
+  return v;
+}
+
+// Get channel Id
+function httpGetChannelId(channel) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("GET", `https://api.twitch.tv/helix/users?login=${channel}`, false);
+  xmlHttp.setRequestHeader("Client-ID", config.client_id);
+  xmlHttp.send(null);
+
+  var response = JSON.parse(xmlHttp.responseText);
+  return response.data[0].id;
+}
+
+// Check whether stream is online or not
+function isStreamOnline(channelId) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("GET", `https://api.twitch.tv/helix/streams?user_id=${channelId}`, false);
+  xmlHttp.setRequestHeader("Client-ID", config.client_id);
+  xmlHttp.send(null);
+
+  var response = JSON.parse(xmlHttp.responseText);
+  if (response['data'].length === 0) {
+    console.log(`DEBUG: Stream ${channelId} is offline`);
+    return false;
+  } else {
+    console.log(`DEBUG: Stream ${channelId} is online`);
+    return true;
+  }
+}
+
+function isAlreadyViewer(channel, username) {
+  var i = client.channels.indexOf(channel);
+  return containsObject(username, viewers[i]);
+}
+
+function proceedNewViewer(channel, username) {
+  var i = client.channels.indexOf(channel);
+  viewers[i].push(username);
 }
 
 function containsObject(obj, list) {
@@ -90,25 +119,19 @@ function containsObject(obj, list) {
 }
 
 const hello = [
-  ", приветик!!! prayplHello",
-  ", дарова prayplHello",
-  ", prayplHello prayplHello prayplHello",
-  ", привет prayplHello",
-  ", привеееет prayplHello",
-  ", хай prayplHello",
-  ", ку prayplHello",
-  ", друтути prayplHello",
-  ", хеллоу prayplHello",
-  ", хай prayplHello",
-  ", хаю-хай prayplHello",
-  ", привет prayplHello, как дела?",
-  ", дарова prayplHello",
-  ", дароуууу prayplHello"
-]
-
-const other_bots = [
-  "moobot",
-  "streamelements",
-  "nightbot",
-  "pray_play"
+  ", приветик!!! muldZdarova ",
+  ", дарова muldZdarova ",
+  ", muldZdarova muldZdarova muldZdarova ",
+  ", привет muldZdarova",
+  ", привеееет muldZdarova",
+  ", хай muldZdarova",
+  ", ку muldZdarova",
+  ", друтути muldZdarova",
+  ", хеллоу muldZdarova",
+  ", хай muldZdarova",
+  ", хаю-хай muldZdarova",
+  ", привет muldZdarova, как дела?",
+  ", дарова muldZdarova",
+  ", дароуууу muldZdarova",
+  ", АХОЙЙ muldZdarova"
 ]

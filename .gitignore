@@ -48,6 +48,7 @@ Temporary Items
 .idea/
 yarn.lock
 node_modules/
+.node-*
 config/default.json5
 nohup.out
 
