@@ -27,7 +27,6 @@ function init() {
   for (var i = 0; i < client.channels.length; i++) {
     channels[i] = httpGetChannelId(client.channels[i]);
     viewers[i] = httpGetViewers(client.channels[i]);
-    client.action(client.channels[i], "Бот версии 4.1 уже в вашем чате)");
   }
 }
 
@@ -98,14 +97,6 @@ function proceedNewMessage(channel, user, message) {
   message = message.toLowerCase();
 
   if (!isAlreadyViewer(channel, user.username)) {
-    if (
-      message.includes("привет") || message.includes("хай") || 
-      message.includes("ку") || message.includes("даров") || 
-      message.includes("hi") || message.includes("hello")) {
-        return;
-      } else {
-        client.action(channel, user.username + ", а поздароваться не хочешь?");
-      }
     proceedNewViewer(channel, user.username);
     client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
   }
