@@ -99,9 +99,9 @@ function proceedNewMessage(channel, user, message) {
 
   if (!isAlreadyViewer(channel, user.username)) {
     if (
-      message.includes("привет") && message.includes("хай") && 
-      message.includes("ку") && message.includes("даров") && 
-      message.includes("hi") && message.includes("hello")) {
+      message.includes("привет") || message.includes("хай") || 
+      message.includes("ку") || message.includes("даров") || 
+      message.includes("hi") || message.includes("hello")) {
         return;
       } else {
         client.action(channel, user.username + ", а поздароваться не хочешь?");
