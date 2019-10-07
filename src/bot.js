@@ -132,9 +132,6 @@ function proceedNewMessage(channel, user, message) {
       client.action(channel, user.username + default_answers[Math.floor(Math.random() * default_answers.length)]);
       return;
     }
-
-    client.action(channel, user.username + default_msg[Math.floor(Math.random() * default_msg.length)]);
-
   }
 }
 
@@ -206,7 +203,7 @@ const default_answers = [
   ", потому что гладиолус",
   ", а зачем ?",
   ", потому что конь в ванной",
-  ", потому что ТАК ЗАДУМАНО",
+  ", потому что так задумано",
   ", потому что крокодил ходит лежа"
 ]
 
@@ -251,15 +248,4 @@ const question_how = [
   ", сколько нужно?",
   ", а вот не скажу",
   ", я хз сколько"
-]
-
-const default_msg = [
-  ", а я слюну пустил",
-  ", я думаю что я программный гей",
-  ", как же надоела эта ботская жизнь",
-  ", все хотят меня забанить",
-  ", как можно жить не поиграв в БДБ",
-  ", я усталь",
-  ", я просто гений",
-  ", СтримЭлементс лох"
 ]
