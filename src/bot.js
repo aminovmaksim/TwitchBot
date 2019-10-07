@@ -16,20 +16,7 @@ client.on("chat", (channel, user, message, self) => {
     return;
   }
 
-  if (!isAlreadyViewer(channel, user.username)) {
-    proceedNewViewer(channel, user.username);
-    client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
-  }
-
-  message = message.toLowerCase();
-
-  if (message.includes("zortan") || message.includes("зортан")) {
-    if (message.includes("бот") || message.includes("mrdestructoid")) {
-      client.action(channel, user.username + bot_angry[Math.floor(Math.random() * bot_angry.length)]);
-      return;
-    }
-    client.action(channel, user.username + default_answers[Math.floor(Math.random() * default_answers.length)]);
-  }
+  proceedNewMessage(channel, user, message);
 });
 
 
@@ -40,6 +27,7 @@ function init() {
   for (var i = 0; i < client.channels.length; i++) {
     channels[i] = httpGetChannelId(client.channels[i]);
     viewers[i] = httpGetViewers(client.channels[i]);
+    client.action(client.channels[i], "Бот версии 4.1 уже в вашем чате)");
   }
 }
 
@@ -51,15 +39,6 @@ setInterval(function() {
     }
   }
 }, 600000);
-
-// Ask random viewer random question
-setInterval(function() {
-  for (var i = 0; i < client.channels.length; i++) {
-    if (isStreamOnline(channels[i])) {
-      client.action(client.channels[i], general_questions[Math.floor(Math.random() * general_questions.length)]);
-    }
-  }
-}, 180000);
 
 // Get current stream viewers
 function httpGetViewers(channel) {
@@ -112,6 +91,60 @@ function isAlreadyViewer(channel, username) {
 function proceedNewViewer(channel, username) {
   var i = client.channels.indexOf(channel);
   viewers[i].push(username);
+}
+
+function proceedNewMessage(channel, user, message) {
+
+  message = message.toLowerCase();
+
+  if (!isAlreadyViewer(channel, user.username)) {
+    if (
+      message.includes("привет") && message.includes("хай") && 
+      message.includes("ку") && message.includes("даров") && 
+      message.includes("hi") && message.includes("hello")) {
+        return;
+      } else {
+        client.action(channel, user.username + ", а поздароваться не хочешь?");
+      }
+    proceedNewViewer(channel, user.username);
+    client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
+  }
+
+  if (message.includes("zortan") || message.includes("зортан")) {
+
+    if (message.includes("бот") || message.includes("mrdestructoid")) {
+      client.action(channel, user.username + bot_angry[Math.floor(Math.random() * bot_angry.length)]);
+      return;
+    }
+
+    if (message.includes("кто") || message.includes("хто")) {
+      client.action(channel, user.username + question_who[Math.floor(Math.random() * question_who.length)]);
+      return;
+    }
+
+    if (message.includes("когда") || message.includes("када")) {
+      client.action(channel, user.username + question_when[Math.floor(Math.random() * question_when.length)]);
+      return;
+    }
+
+    if (message.includes("сколько") || message.includes("скока")) {
+      client.action(channel, user.username + question_how_much[Math.floor(Math.random() * question_how_much.length)]);
+      return;
+    }
+
+    if (message.includes("как")) {
+      client.action(channel, user.username + question_how[Math.floor(Math.random() * question_how.length)]);
+      return;
+    }
+
+    if (message.includes("?")) {
+      client.action(channel, user.username + default_answers[Math.floor(Math.random() * default_answers.length)]);
+      return;
+    }
+
+    client.action(channel, user.username + default_msg[Math.floor(Math.random() * default_msg.length)]);
+
+  }
 }
 
 function containsObject(obj, list) {
@@ -186,27 +219,56 @@ const default_answers = [
   ", потому что крокодил ходит лежа"
 ]
 
-const general_questions = [
-  "Сокращения и корявый почерк в лекциях - защита от ботов )",
-  "Можно не беспокоиться до тех пор, пока боты не начнут писать собственных ботов для выполнения всяких рутинных задач.",
-  "За мной по пятам ползает робот-пылесос. Старею, что ли?",
-  "Вчера нажрался. Ночью троллил ботов.",
-  "Жаль, что никто еще не придумал такую капчу, чтобы не ботов отсеивать, а мудаков.",
-  "Я назвал кота Джон Коннор, потому что он бьет лапой робот-пылесос.",
-  "Дома срач. Купил робот-пылесос. Собрал, включил. Он сделал ознакомительный круг по квартире и бросился наутек...",
-  "Могут ли продать пиво роботу, изготовленному после 2005 года? Должен ли робот показать свой техпаспорт, или нужен паспорт владельца?",
-  "Завтра пасха, убираться дома нельзя! Думаю, говорить ли это моему роботу-пылесосу?",
-  "Знаешь как роботы смеются??? Вот так - ]]]]]]]]]",
-  "Не бывает некрасивых роботов, бывает мало напряжения. ",
-  "Не всё то золото, что не окисляется. ",
-  "Что у трезвого в базе данных, то у пьяного на дисплее. ",
-  "Не было бы апгрейда, да короткое замыкание помогло. ",
-  "Если бы да кабы, всё на ноль делилося бы...",
-  "Семья роботов садится за стол. Сын-робот спрашивает у мамы-робота: - Мама, а что у нас сегодня на обед ? - БОЛТ.",
-  "Семь раз отмерь, одиннадцать раз отрежь.",
-  "И роботы сыты, и программисты целы.",
-  "Кому атака вирусна – кому плата материнска.",
-  "Нашёл катод на анод. ",
-  "Кто не работает, тот нуждается в дополнительном питании"
+const question_who = [
+  ", ты",
+  ", не я",
+  ", кто-то наверное",
+  ", я хз",
+  ", точно стрилер",
+  ", конь в пально",
+  ", дед в пальто",
+  ", это точно Двайт"
 ]
 
+const question_when = [
+  ", никогда",
+  ", завтра",
+  ", послезавтра",
+  ", я хз",
+  ", когда ты замолчишь",
+  ", когда нюрсу понерфят",
+  ", когда скинешь мне сотку",
+]
+
+const question_how_much = [
+  ", много",
+  ", мало",
+  ", недостаточно",
+  ", недостаточно, чтобы ты отстал от меня",
+  ", three hundred bucks",
+  ", сколько нужно?",
+  ", а вот не скажу",
+  ", я хз сколько"
+]
+
+const question_how = [
+  ", никак",
+  ", а вот так",
+  ", ну вот так вот",
+  ", жопой об косяк",
+  ", three hundred bucks",
+  ", сколько нужно?",
+  ", а вот не скажу",
+  ", я хз сколько"
+]
+
+const default_msg = [
+  ", а я слюну пустил",
+  ", я думаю что я программный гей",
+  ", как же надоела эта ботская жизнь",
+  ", все хотят меня забанить",
+  ", как можно жить не поиграв в БДБ",
+  ", я усталь",
+  ", я просто гений",
+  ", СтримЭлементс лох"
+]
