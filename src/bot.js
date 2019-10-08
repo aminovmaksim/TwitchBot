@@ -72,7 +72,7 @@ function isStreamOnline(channelId) {
   xmlHttp.setRequestHeader("Client-ID", config.client_id);
   xmlHttp.send(null);
 
-  if (xmlHttp.responseText === 'undefined')
+  if (xmlHttp.responseText === "undefined")
     return false;
   var response = JSON.parse(xmlHttp.responseText);
   if (response['data'].length === 0) {
