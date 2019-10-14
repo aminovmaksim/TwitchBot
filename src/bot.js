@@ -67,21 +67,28 @@ function httpGetChannelId(channel) {
 
 // Check whether stream is online or not
 function isStreamOnline(channelId) {
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("GET", `https://api.twitch.tv/helix/streams?user_id=${channelId}`, false);
-  xmlHttp.setRequestHeader("Client-ID", config.client_id);
-  xmlHttp.send(null);
 
-  if (xmlHttp.responseText === "undefined")
+  try {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", `https://api.twitch.tv/helix/streams?user_id=${channelId}`, false);
+    xmlHttp.setRequestHeader("Client-ID", config.client_id);
+    xmlHttp.send(null);
+
+    if (xmlHttp.responseText === "undefined")
+      return false;
+    var response = JSON.parse(xmlHttp.responseText);
+    if (response['data'].length === 0) {
+      console.log(`DEBUG: Stream ${channelId} is offline`);
+      return false;
+    } else {
+      console.log(`DEBUG: Stream ${channelId} is online`);
+      return true;
+    }
+  } catch (e) {
+    console.log("-------------------ERROR----------------\n" + e.message);
     return false;
-  var response = JSON.parse(xmlHttp.responseText);
-  if (response['data'].length === 0) {
-    console.log(`DEBUG: Stream ${channelId} is offline`);
-    return false;
-  } else {
-    console.log(`DEBUG: Stream ${channelId} is online`);
-    return true;
   }
+
 }
 
 function isAlreadyViewer(channel, username) {
