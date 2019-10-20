@@ -110,38 +110,6 @@ function proceedNewMessage(channel, user, message) {
     client.action(channel, user.username + hello[Math.floor(Math.random() * hello.length)]);
   }
 
-  if (message.includes("zortan") || message.includes("зортан")) {
-
-    if (message.includes("бот") || message.includes("mrdestructoid")) {
-      client.action(channel, user.username + bot_angry[Math.floor(Math.random() * bot_angry.length)]);
-      return;
-    }
-
-    if (message.includes("кто") || message.includes("хто")) {
-      client.action(channel, user.username + question_who[Math.floor(Math.random() * question_who.length)]);
-      return;
-    }
-
-    if (message.includes("когда") || message.includes("када")) {
-      client.action(channel, user.username + question_when[Math.floor(Math.random() * question_when.length)]);
-      return;
-    }
-
-    if (message.includes("сколько") || message.includes("скока")) {
-      client.action(channel, user.username + question_how_much[Math.floor(Math.random() * question_how_much.length)]);
-      return;
-    }
-
-    if (message.includes("как")) {
-      client.action(channel, user.username + question_how[Math.floor(Math.random() * question_how.length)]);
-      return;
-    }
-
-    if (message.includes("?")) {
-      client.action(channel, user.username + default_answers[Math.floor(Math.random() * default_answers.length)]);
-      return;
-    }
-  }
 }
 
 function containsObject(obj, list) {
@@ -171,80 +139,4 @@ const hello = [
   ", дароуууу muldZdarova",
   ", АХОЙЙ muldZdarova",
   ", алоха muldZdarova"
-]
-
-const bot_angry = [
-  ", сам ты бот",
-  ", я не бооот",
-  ", да вы достали называть меня ботом",
-  ", да я бот и че ты мне сделаешь? а?",
-  ", еще раз назовешь меня ботом, я уйду (нет)",
-  ", и че?",
-  ", еще я филантроп, гений и просто кодзима",
-  ", сам ты бот MrDestructoid"
-]
-
-const default_answers = [
-  ", я чет хз на самом деле",
-  ", наверное скорее да, чем нет",
-  ", а что ты сам думаешь?",
-  ", а к этому вопросу я не готовился",
-  ", надо разобраться в этом вопросе",
-  ", на все воля божья",
-  ", я не знаю",
-  ", ну, это как посмотреть",
-  ", я вас услышал",
-  ", нет",
-  ", точно нет",
-  ", ну такое",
-  ", не видишь, я бухаю??? ",
-  ", чо?",
-  ", а что бы на это сказал Иисус?",
-  ", ты сейчас серьезно?",
-  ", ?",
-  ", ...",
-  ", сначала ты ответь, когда нюрсу понерфят?"
-]
-
-const question_who = [
-  ", ты",
-  ", не я",
-  ", кто-то наверное",
-  ", я хз",
-  ", точно стрилер",
-  ", конь в пально",
-  ", дед в пальто",
-  ", нюрса"
-]
-
-const question_when = [
-  ", никогда",
-  ", завтра",
-  ", послезавтра",
-  ", я хз",
-  ", когда ты замолчишь",
-  ", когда нюрсу понерфят",
-  ", когда скинешь мне сотку",
-]
-
-const question_how_much = [
-  ", много",
-  ", мало",
-  ", недостаточно",
-  ", недостаточно, чтобы ты отстал от меня",
-  ", three hundred bucks",
-  ", сколько нужно?",
-  ", а вот не скажу",
-  ", я хз сколько"
-]
-
-const question_how = [
-  ", никак",
-  ", а вот так",
-  ", ну вот так вот",
-  ", жопой об косяк",
-  ", three hundred bucks",
-  ", а как нужно?",
-  ", а вот не скажу",
-  ", я хз как"
 ]
