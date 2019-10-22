@@ -15,7 +15,6 @@ client.on("chat", (channel, user, message, self) => {
   if (user.username === config.identity.username) { // bot message
     return;
   }
-
   proceedNewMessage(channel, user, message);
 });
 
