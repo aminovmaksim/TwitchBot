@@ -125,19 +125,19 @@ function containsObject(obj, list) {
 
 const hello = [
   ", приветик!!! muldZdarova ",
-  ", дарова muldZdarova ",
+  ", дарова casusLove ",
   ", muldZdarova muldZdarova muldZdarova ",
-  ", привет muldZdarova",
+  ", привет casusLove",
   ", привеееет muldZdarova",
-  ", хай muldZdarova",
+  ", хай casusLove",
   ", ку muldZdarova",
-  ", друтути muldZdarova",
+  ", друтути casusLove",
   ", хеллоу muldZdarova",
-  ", хай muldZdarova",
+  ", хай casusLove",
   ", хаю-хай muldZdarova",
-  ", привет muldZdarova, как дела?",
+  ", привет casusLove, как дела?",
   ", дарова muldZdarova",
-  ", дароуууу muldZdarova",
+  ", дароуууу casusLove",
   ", АХОЙЙ muldZdarova",
-  ", алоха muldZdarova"
+  ", алоха casusLove"
 ]
