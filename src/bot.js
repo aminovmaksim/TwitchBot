@@ -36,7 +36,7 @@ setInterval(function() {
       viewers[i] = [];
     }
   }
-}, 600000);
+}, 3600000);
 
 // Get current stream viewers
 function httpGetViewers(channel) {
@@ -63,6 +63,8 @@ function httpGetChannelId(channel) {
   var response = JSON.parse(xmlHttp.responseText);
   return response.data[0].id;
 }
+
+
 
 // Check whether stream is online or not
 function isStreamOnline(channelId) {
