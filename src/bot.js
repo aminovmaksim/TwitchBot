@@ -135,7 +135,6 @@ const hello = [
   ", хеллоу zortanHi",
   ", хай zortanHi",
   ", хаю-хай zortanHi",
-  ", привет zortanHi, как дела?",
   ", дарова zortanHi",
   ", дароуууу zortanHi",
   ", АХОЙЙ zortanHi",
