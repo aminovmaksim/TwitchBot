@@ -13,6 +13,6 @@
   channels: [ // channels to connect
     "channel1",
     "channel2"
-  ]
+  ],
   client_id : "your client-id here" // Get this id at https://dev.twitch.tv/
 }

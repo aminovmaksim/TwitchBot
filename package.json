@@ -15,7 +15,8 @@
     "@babel/preset-env": "^7.6.2",
     "config": "^3.0.1",
     "nodemon": "^1.19.2",
-    "tmi.js": "^1.4.2"
+    "tmi.js": "^1.4.2",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "jest": "^24.9.0"
