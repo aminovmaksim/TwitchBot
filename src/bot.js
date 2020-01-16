@@ -24,12 +24,16 @@ function init() {
   channels = [];
   viewers = [];
   for (var i = 0; i < client.channels.length; i++) {
-    ch = httpGetChannelId(client.channels[i]);
-    channels[i] = ch;
+    channels[i] = httpGetChannelId(client.channels[i]);
     viewers[i] = httpGetViewers(client.channels[i]);
-    client.action(ch, "Kappa");
   }
 }
+
+setTimeout(function() {
+  for (var i = 0; i < client.channels.length; i++) {
+    client.action(client.channels[i], "Kappa");
+  }
+}, 30000);
 
 // If stream is offline then clear viewers array
 setInterval(function() {
@@ -37,6 +41,7 @@ setInterval(function() {
     if (!isStreamOnline(channels[i])) {
       viewers[i] = [];
     }
+    client.action(client.channels[i], "Kappa");
   }
 }, 3600000);
 
