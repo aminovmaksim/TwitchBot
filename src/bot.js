@@ -36,14 +36,14 @@ setTimeout(function() {
 }, 30000);
 
 // If stream is offline then clear viewers array
-setInterval(function() {
-  for (var i = 0; i < channels.length; i++) {
-    if (!isStreamOnline(channels[i])) {
-      viewers[i] = [];
-    }
-    client.action(client.channels[i], "Kappa");
-  }
-}, 3600000);
+// setInterval(function() {
+//   for (var i = 0; i < channels.length; i++) {
+//     if (!isStreamOnline(channels[i])) {
+//       viewers[i] = [];
+//     }
+//     client.action(client.channels[i], "Kappa");
+//   }
+// }, 1200000);
 
 // Get current stream viewers
 function httpGetViewers(channel) {
