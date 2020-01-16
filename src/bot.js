@@ -15,7 +15,7 @@ client.on("chat", (channel, user, message, self) => {
   if (user.username === config.identity.username) { // bot message
     return;
   }
-  proceedNewMessage(channel, user, message);
+  //proceedNewMessage(channel, user, message);
 });
 
 
@@ -24,8 +24,10 @@ function init() {
   channels = [];
   viewers = [];
   for (var i = 0; i < client.channels.length; i++) {
-    channels[i] = httpGetChannelId(client.channels[i]);
+    ch = httpGetChannelId(client.channels[i]);
+    channels[i] = ch;
     viewers[i] = httpGetViewers(client.channels[i]);
+    client.action(ch, "Kappa");
   }
 }
 
