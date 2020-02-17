@@ -12,13 +12,8 @@ init();
 
 // Commands
 client.on("chat", (channel, user, message, self) => {
-  // if (user.username === config.identity.username) { // bot message
-  //   return;
-  // }
-  if (message.includes("!raffle") || message.includes("!sraffle")) {
-    setTimeout(function() {
-      client.action(channel, "!join");
-    }, 2000);
+  if (user.username === config.identity.username) { // bot message
+    return;
   }
   //proceedNewMessage(channel, user, message);
 });
